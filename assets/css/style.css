@@ -18,6 +18,7 @@ footer {
     background: rgba(47, 66, 25, 1);
     width: 100%;
     padding: 10px 10px;
+    text-align: right;
 }
 
 footer h4 {
