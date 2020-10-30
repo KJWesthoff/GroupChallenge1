@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css" />
     <title>Trein</title>
-
 
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
-
 </head>
 <body>
-    
+    <header>
+        <h1>Trein</h1>
+        <h3>Always be full steam ahead.</h3>
+    </header>
+
+    <!-- Map here -->
     <div id='map' style='width: 400px; height: 300px;'></div>
     <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VzbW9yOTQiLCJhIjoiY2tndnB3NHN0MDJyYzMxcG5jeXdwb2FsdiJ9.CRLb5ok63M2sLPu3D6oseA';
@@ -21,7 +25,15 @@
     });
     </script>
 
-
+    
     <script src = "assets/js/script.js"></script>
+
+    <!-- footer-->
+    <footer>
+        <h4>Made for commuters, by commuters.</h4>
+        <div>
+            <h5>&copy; KBG, Inc.</h5>
+        </div>
+    </footer>
 </body>
 </html>
