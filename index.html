@@ -3,10 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trein</title>
+
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+
 </head>
 <body>
     
+    <div id='map' style='width: 400px; height: 300px;'></div>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VzbW9yOTQiLCJhIjoiY2tndnB3NHN0MDJyYzMxcG5jeXdwb2FsdiJ9.CRLb5ok63M2sLPu3D6oseA';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11'
+    });
+    </script>
+
+
     <script src = "assets/js/script.js"></script>
 </body>
 </html>
