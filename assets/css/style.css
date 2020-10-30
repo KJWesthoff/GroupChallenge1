@@ -1,0 +1,32 @@
+gitbody {
+    background: rgba(179, 195, 161, 1);
+}
+
+h1 {
+    color: rgba(47, 66, 25, 1);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 700;
+}
+
+h3 {
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 300;
+}
+
+footer {
+    background: rgba(47, 66, 25, 1);
+    width: 100%;
+    padding: 10px 10px;
+    text-align: right;
+}
+
+footer h4 {
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+footer h5 {
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
