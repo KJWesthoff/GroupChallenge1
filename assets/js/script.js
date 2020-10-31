@@ -20,7 +20,10 @@ url_disruptions = `https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/dis
 url_stations = "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations"
 data = consoleLogData(url_stations);
 
+var stationDots
 
+
+//------------------
 function consoleLogData(url){
 
     fetch(url, init).then(function(res){
@@ -31,20 +34,49 @@ function consoleLogData(url){
         return res.json();
     }).then(function(data){
         
-       
-
+        stationList = []
         for(station of data.payload){
-            
-            var name = station.namen.middel
-            var country = station.land
-            var lon = station.lng
-            var lat = station.lat
+            // make a geojson featureCollection for each station        
+            featureObj = {
+                "type":"Feature",
+                "geometry": {
+                    "type":"point",
+                    "coordinates": [station.lng,station.lat],
+                },
+                "properties":{
+                    "title":`${station.stationType}`,
+                    "description":`${station.namen.middel}`,
+                } 
+            };
+            stationList.push(featureObj);
+        };
+        
+        // build a geoJSON obj
+        stationDots = {
+            "type":"FeatureCollection",
+            "features": stationList,
+        }
 
-            var string = `${name} country ${country} at: lat,lon : ${lat},${lon}`;
 
-            console.log(string)
+        console.log(typeof stationDots.features[3].geometry.coordinates);
 
+
+        for(st of stationDots.features){
+
+            // create a html element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker';
+
+            new mapboxgl.Marker(el).setLngLat(st.geometry.coordinates).addTo(map);
+
+            new mapboxgl.Marker(el)
+                .setLngLat(st.geometry.coordinates)
+                .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                    .setHTML('<h3>' + st.properties.title + '</h3><p>' + st.properties.description + '</p>'))
+                .addTo(map);            
 
         };
+        
+       
     });
 };
