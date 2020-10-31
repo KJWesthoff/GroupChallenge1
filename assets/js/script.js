@@ -6,18 +6,14 @@ var keyname = "Ocp-Apim-Subscription-Key";
 
 init = {
     "method":"GET",
-    "headers" : {"Ocp-Apim-Subscription-Key":"e802f453e0d44b4a8cf3f06882eee4f9"},
+    "headers" : {keyname:key},
 };
-
-
-
-// Disruptions to train service
-url_disruptions = `https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/disruptions`;
 
 
 // lst of stations
 
 url_stations = "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations"
+
 data = consoleLogData(url_stations);
 
 var stationDots
@@ -72,7 +68,7 @@ function consoleLogData(url){
             new mapboxgl.Marker(el)
                 .setLngLat(st.geometry.coordinates)
                 .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-                    .setHTML('<h3>' + st.properties.title + '</h3><p>' + st.properties.description + '</p>'))
+                    .setHTML(`<h4>'${st.properties.title}</h4><p>${st.properties.description}</p>`))
                 .addTo(map);            
 
         };
