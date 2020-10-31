@@ -5,7 +5,7 @@ var key = "e802f453e0d44b4a8cf3f06882eee4f9";
 var keyname = "Ocp-Apim-Subscription-Key";
 
 init = {
-    "method":"GET",
+   
     "headers" : {keyname:key},
 };
 
@@ -14,24 +14,17 @@ init = {
 
 url_stations = "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations"
 
-data = consoleLogData(url_stations);
 
+
+// dots fiw checking in console
 var stationDots
 
 
-//------------------
-function consoleLogData(url){
 
-    fetch(url, init).then(function(res){
-        if(!res.ok){
-            console.log("its not working");        
-        };    
-        console.log("response code" + res.status);
-        return res.json();
-    }).then(function(data){
-        
-        stationList = []
-        for(station of data.payload){
+var buildGeodataObj = function(data){
+
+    stationList = []
+        for(station of data){
             // make a geojson featureCollection for each station        
             featureObj = {
                 "type":"Feature",
@@ -48,31 +41,51 @@ function consoleLogData(url){
         };
         
         // build a geoJSON obj
-        stationDots = {
+        stationsGeodata = {
             "type":"FeatureCollection",
             "features": stationList,
         }
 
+    return stationsGeodata 
+};
+    
+    
+var putMarkersOnMap = function(geodataObj, markerClassName){
 
-        console.log(typeof stationDots.features[3].geometry.coordinates);
-
-
-        for(st of stationDots.features){
+        for(st of geodataObj.features){
 
             // create a html element for each feature
             var el = document.createElement('div');
-            el.className = 'marker';
+            el.innerHTML = '<i class="fas fa-train"></i>';
+            el.className = markerClassName;
 
+            // make a mapbox marker
             new mapboxgl.Marker(el).setLngLat(st.geometry.coordinates).addTo(map);
 
+            // make a mapbox marker popup
             new mapboxgl.Marker(el)
                 .setLngLat(st.geometry.coordinates)
                 .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
                     .setHTML(`<h4>'${st.properties.title}</h4><p>${st.properties.description}</p>`))
                 .addTo(map);            
-
         };
         
-       
-    });
-};
+}
+
+// Main part fetch
+
+fetch(url_stations, init).then(function(res){
+    if(!res.ok){
+        console.log("its not working");        
+    };    
+    console.log("response code" + res.status);
+    return res.json();
+}).then(function(data){
+    
+
+    // get the data and plot the stations
+    var stationGeoDataObj = buildGeodataObj(data.payload);
+    putMarkersOnMap(stationGeoDataObj, "stationmarker");
+    
+});
+
