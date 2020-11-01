@@ -19,60 +19,84 @@ url_stations = "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/statio
 // dots fiw checking in console
 var stationDots
 
-
-
-var buildGeodataObj = function(data){
-
-    stationList = []
-        for(station of data){
-            // make a geojson featureCollection for each station        
-            featureObj = {
-                "type":"Feature",
-                "geometry": {
-                    "type":"point",
-                    "coordinates": [station.lng,station.lat],
-                },
-                "properties":{
-                    "title":`${station.stationType}`,
-                    "description":`${station.namen.middel}`,
-                } 
-            };
-            stationList.push(featureObj);
-        };
         
-        // build a geoJSON obj
-        stationsGeodata = {
-            "type":"FeatureCollection",
-            "features": stationList,
-        }
-
-    return stationsGeodata 
-};
+var putMarkersOnMap = function(dataObj){
+    // function putting markers in the map
+    // Inputs:  dataObg: NS-rail API list of station objcts
     
-    
-var putMarkersOnMap = function(geodataObj, markerClassName){
 
-        for(st of geodataObj.features){
+        for(st of dataObj){
+
+            var coordinates = [st.lng,st.lat]
 
             // create a html element for each feature
             var el = document.createElement('div');
-            el.innerHTML = '<i class="fas fa-train"></i>';
-            el.className = markerClassName;
+            el.innerHTML = '<i class="stationmarker fas fa-train"></i>';
+            //el.className = ;
+            el.setAttribute("data-obj", JSON.stringify(st));
 
             // make a mapbox marker
-            new mapboxgl.Marker(el).setLngLat(st.geometry.coordinates).addTo(map);
+            new mapboxgl.Marker(el).setLngLat(coordinates).addTo(map);
 
             // make a mapbox marker popup
             new mapboxgl.Marker(el)
-                .setLngLat(st.geometry.coordinates)
+                .setLngLat(coordinates)
                 .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-                    .setHTML(`<h4>'${st.properties.title}</h4><p>${st.properties.description}</p>`))
+                    .setHTML(`<h4>'${st.namen.middel}</h4><p>${st.stationType}</p>`))
                 .addTo(map);            
         };
         
 }
 
-// Main part fetch
+
+//Callbacks
+clickOnStation = function(event){
+    var el = event.target;
+    
+    
+
+    if(el.classList.contains("stationmarker")){
+        var stationdata = JSON.parse(el.parentElement.getAttribute("data-obj"));
+        
+        // Add whatever happens here..
+        
+        
+        // Get the station data
+        var UICCode = stationdata.UICCode
+
+        //Get list of arriving trains
+
+        //build url
+        url_arrivals = `https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/arrivals?uicCode=${UICCode}`
+        // fetch the arrving train data
+        var arrivingTrains = fetchData(url_arrivals).then(function(data){
+        console.log(data.arrivals);
+        });
+        
+    };
+    
+
+
+}; 
+
+
+// Main fetch funcition - made async
+async function fetchData(url){
+    let res = await fetch(url, init);
+    if(!res.ok){
+        console.log("its not working");        
+    } else {    
+        console.log("response code" + res.status);  
+        var data = await res.json();
+        
+        return data.payload
+    };    
+};
+
+
+
+
+
 
 fetch(url_stations, init).then(function(res){
     if(!res.ok){
@@ -84,8 +108,10 @@ fetch(url_stations, init).then(function(res){
     
 
     // get the data and plot the stations
-    var stationGeoDataObj = buildGeodataObj(data.payload);
-    putMarkersOnMap(stationGeoDataObj, "stationmarker");
-    
+    putMarkersOnMap(data.payload);  
 });
+
+
+document.getElementById("map").addEventListener("click", clickOnStation);
+
 
