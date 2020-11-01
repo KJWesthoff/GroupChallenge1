@@ -30,8 +30,13 @@ footer {
     width: 100%;
     padding: 10px 10px;
     text-align: right;
+<<<<<<< HEAD
     position: absolute;
     bottom: 0;
+=======
+    /* position: relative;
+    z-index: 101; */
+>>>>>>> ec76cdd06ee1605efdf5165345c755e5b95380ff
 }
 
 footer h4 {
