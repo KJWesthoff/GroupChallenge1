@@ -1,17 +1,28 @@
-gitbody {
+body {
     background: rgba(179, 195, 161, 1);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    z-index: 100;
+    top: 0;
+    background-color: rgba(179, 195, 161, 1);
 }
 
 h1 {
     color: rgba(47, 66, 25, 1);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 700;
+    padding-left: 15px;
 }
 
 h3 {
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 300;
+    margin: 30px 15px 0 30px;
 }
 
 footer {
@@ -19,6 +30,8 @@ footer {
     width: 100%;
     padding: 10px 10px;
     text-align: right;
+    position: absolute;
+    bottom: 0;
 }
 
 footer h4 {
@@ -30,3 +43,4 @@ footer h5 {
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
