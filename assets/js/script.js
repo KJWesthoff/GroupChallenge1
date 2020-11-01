@@ -6,7 +6,7 @@ var keyname = "Ocp-Apim-Subscription-Key";
 
 init = {
     "method":"GET",
-    "headers":{keyname:key},
+    "headers":{"Ocp-Apim-Subscription-Key":key},
 };
 
 
