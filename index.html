@@ -13,8 +13,8 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
     <style>
-        /* body { margin: 0; padding: 0; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%;} */
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
     </style>
 
 </head>
@@ -25,8 +25,7 @@
     </header>
 
     <!-- Map here -->
-
-    <div id='map' style='width: 400px; height: 300px;'></div>
+    <div id='map'></div>
     <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VzbW9yOTQiLCJhIjoiY2tndnB3NHN0MDJyYzMxcG5jeXdwb2FsdiJ9.CRLb5ok63M2sLPu3D6oseA';
     var map = new mapboxgl.Map({
@@ -36,10 +35,12 @@
         zoom: 7
     });
 
+    // disable map scroll zoom
+    //map.scrollZoom.disable();
     </script>
 
-        <div id="" style="width: height "></div>
     
+
     <script src = "assets/js/script.js"></script>
 
     <!-- footer-->
