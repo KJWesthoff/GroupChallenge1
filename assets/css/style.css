@@ -2,28 +2,28 @@ body {
     background: rgba(179, 195, 161, 1);
 }
 
-header {
+/* header {
     display: flex;
     justify-content: space-between;
     position: sticky;
     z-index: 100;
     top: 0;
     background-color: rgba(179, 195, 161, 1);
-}
+} */
 
-h1 {
+/* h1 {
     color: rgba(47, 66, 25, 1);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 700;
     padding-left: 15px;
-}
+} */
 
-h3 {
+/* h3 {
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 300;
     margin: 30px 15px 0 30px;
-}
+} */
 
 footer {
     background: rgba(47, 66, 25, 1);
