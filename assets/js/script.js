@@ -1,18 +1,28 @@
 console.log("is it working..")
 
 var key = "e802f453e0d44b4a8cf3f06882eee4f9";
-
 var keyname = "Ocp-Apim-Subscription-Key";
+
+
+
+
+//var cors = require('cors');
+//app.use(cors());
 
 init = {
     "method":"GET",
     "headers":{"Ocp-Apim-Subscription-Key":key},
+    
+
 };
 
-
-// lst of stations
-
+// get stations on the map
 url_stations = "https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations"
+
+fetchData(url_stations).then(function(data){
+    putMarkersOnMap(data)
+});
+
 
 
 
@@ -37,7 +47,8 @@ var putMarkersOnMap = function(dataObj){
 
             // make a mapbox marker
             new mapboxgl.Marker(el).setLngLat(coordinates).addTo(map);
-
+            
+            // add popups
             // make a mapbox marker popup
             new mapboxgl.Marker(el)
                 .setLngLat(coordinates)
@@ -53,14 +64,12 @@ var putMarkersOnMap = function(dataObj){
 clickOnStation = function(event){
     var el = event.target;
     
-    
-
     if(el.classList.contains("stationmarker")){
         var stationdata = JSON.parse(el.parentElement.getAttribute("data-obj"));
         
         // Add whatever happens here..
         
-        
+       
         // Get the station data
         var UICCode = stationdata.UICCode
 
@@ -69,15 +78,62 @@ clickOnStation = function(event){
         //build url
         url_arrivals = `https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/arrivals?uicCode=${UICCode}`
         // fetch the arrving train data
-        var arrivingTrains = fetchData(url_arrivals).then(function(data){
-        console.log(data.arrivals);
+        
+        fetchData(url_arrivals).then(function(data){
+        
+        // put the list of trains in the popup for the station    
+          
+        listEl = document.createElement("ol");
+        //console.log(data.arrivals) 
+        for(train of data.arrivals){
+            var trainlist = `${train.product.longCategoryName} ${train.name} From ${train.origin}`;
+            
+            itemEl = document.createElement("li");
+            itemEl.innerHTML = `<p id="trainlink" data-train = "${train.product.number}" >${trainlist}</p>`;
+            listEl.append(itemEl)
+            
+
+        };
+       
+        popUpEl = document.querySelector(".mapboxgl-popup-content")
+        popUpEl.append(listEl)
+        
         });
         
     };
-    
-
 
 }; 
+
+var getTrainInfo = function(trainNo){
+    url = `https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
+
+    fetch(url,init).then(function(res){
+        
+        return res.json()
+    }).then(function(data){
+        console.log(data);
+    });
+};
+
+
+// get tracks on the map
+//fetch("https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/1406",init).then(function(res){
+//    console.log(res);
+//    return res.json()
+//}).then(function(data){
+//    console.log(data)
+//})
+
+
+
+
+clickOnTrain = function(event){
+    var trainNo = event.target.getAttribute("data-train");
+    console.log("Train No "+ trainNo);
+    getTrainInfo(trainNo);
+};
+
+
 
 
 // Main fetch funcition - made async
@@ -95,21 +151,8 @@ async function fetchData(url){
 
 
 
+$("body").on("click", "#trainlink",clickOnTrain);
 
-
-
-fetch(url_stations, init).then(function(res){
-    if(!res.ok){
-        console.log("its not working");        
-    };    
-    console.log("response code" + res.status);
-    return res.json();
-}).then(function(data){
-    
-
-    // get the data and plot the stations
-    putMarkersOnMap(data.payload);  
-});
 
 
 document.getElementById("map").addEventListener("click", clickOnStation);
