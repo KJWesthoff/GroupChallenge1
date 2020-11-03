@@ -45,13 +45,17 @@ body {
     border-radius: 10px;
 }
 
-.times-list-group  {
-    list-style: none;
+.arrival-time, .departure-time {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 15px;
 }
 
-.times-list-group li {
-    display: inline;
+.train-times p {
+    
     padding: 10px;
+    margin-left: 15px;
+    color: white;
     background-color: rgba(179, 195, 161, 1);
     border-radius: 10px;
 }
@@ -74,6 +78,16 @@ body {
     display: none;
 }
 
+.origin, .destination, .facilities {
+    padding: 0 15px;
+}
+.facilities-list-group li {
+    display: inline;
+    padding: 10px;
+    background-color: #efcf33;
+    border-radius: 10px;
+}
+
 @media screen and (max-width: 768px) {
     .home-menu {
         justify-content: center;
@@ -92,5 +106,19 @@ body {
 @media screen and (max-width: 575px) {
     .brand-name span {
         display: none;
+    }
+
+    .train-times h4 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .train-times p {
+        width: 100%;
+        text-align: center;
+    }
+
+    .arrival-time, .departure-time {
+        justify-content: center;
     }
 }

@@ -33,25 +33,43 @@
 
     <div class="train-container card">
         <div class="card-divider">
-            <h3 class="train-name">Train Name</h3>
+            <!-- dynamically add train name into h3 element -->
+            <h3 class="train-name"></h3>
         </div>
-        <img src="" alt="">
         <div class="train-content card-section">
             <div class="train-times">
-                <ul class="times-list-group">
-                    <h4>Train Times</h4>
-                    <hr>
-                    <li class="times-list-item">10:35</li>
-                    <li class="times-list-item">10:35</li>
-                    <li class="times-list-item">10:35</li>
-                    <li class="times-list-item">10:35</li>
-                    <li class="times-list-item">10:35</li>
-                </ul>
+                <!-- dynamically add train arrival and departure time as a 'p' tag beneath 'h4' tags  -->
+                <div class="arrival-time">
+                    <h4>Arrival Time:</h4>
+                    <!-- p tag goes here -->
+                </div>
+                <hr>
+                <div class="departure-time">
+                    <h4>Departure Time:</h4>
+                    <!-- p tag goes here -->>
+                </div>    
+                <hr>    
             </div>
             <br>
             <button class="features-btn">Show Train Features</button>
+            <!-- dynamically add train features -->
             <div class="train-features hidden">
-                
+                <br>
+                <div class="origin">
+                    <h5>Origin:</h5>
+                    <p></p>   
+                </div>
+                <div class="destination">
+                    <h5>Destination:</h5>
+                    <p></p>
+                </div>
+                <div class="facilities">
+                    <h5>Facilities:</h5>
+                    <ul class="facilities-list-group"></ul>
+                </div>
+                <div class="train-img">
+                    <!-- add train img element here -->
+                </div>
             </div>
         </div>
     </div>
