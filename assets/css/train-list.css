@@ -6,6 +6,25 @@
     box-sizing: border-box;
 }
 
+.home-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(179, 195, 161, 1);
+}
+
+.brand-name {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.brand-name span {
+    font-weight: normal;
+    font-size: 1rem;
+    padding-left: 20px;
+}
+
 img {
     width: 100%;
 }
@@ -16,7 +35,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(179, 195, 161, 1);
+    background: #fafafa;
     padding: 0 40px;
 }
 
@@ -35,4 +54,22 @@ body {
     padding: 10px;
     background-color: rgba(179, 195, 161, 1);
     border-radius: 10px;
+}
+
+.features-btn {
+    background-color: #efcf33;
+    margin-left: 15px;
+    padding: 10px;
+    border-radius: 15px;
+    outline: none;
+    border: 1px solid;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.features-btn:hover {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
 }

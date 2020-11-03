@@ -1,29 +1,43 @@
-body {
-    background: rgba(179, 195, 161, 1);
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* header {
+.home-menu {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    position: sticky;
-    z-index: 100;
-    top: 0;
+    align-items: center;
     background-color: rgba(179, 195, 161, 1);
-} */
+}
 
-/* h1 {
+.brand-name {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.brand-name span {
+    font-weight: normal;
+    font-size: 1rem;
+    padding-left: 20px;
+}
+
+h1 {
     color: rgba(47, 66, 25, 1);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 700;
     padding-left: 15px;
-} */
+}
 
-/* h3 {
+h3 {
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 300;
     margin: 30px 15px 0 30px;
-} */
+}
 
 footer {
     background: rgba(47, 66, 25, 1);
