@@ -73,3 +73,24 @@ body {
 .hidden {
     display: none;
 }
+
+@media screen and (max-width: 768px) {
+    .home-menu {
+        justify-content: center;
+    }
+
+    .home-menu ul {
+        padding-bottom: 10px;
+    }
+
+    .brand-name {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .brand-name span {
+        display: none;
+    }
+}
