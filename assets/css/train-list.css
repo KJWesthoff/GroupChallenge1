@@ -16,4 +16,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: rgba(179, 195, 161, 1);
+    padding: 0 40px;
+}
+
+.train-container {
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.times-list-group  {
+    list-style: none;
+}
+
+.times-list-group li {
+    display: inline;
+    padding: 10px;
+    background-color: rgba(179, 195, 161, 1);
+    border-radius: 10px;
 }
