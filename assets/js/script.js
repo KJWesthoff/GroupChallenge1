@@ -104,35 +104,71 @@ clickOnStation = function(event){
 
 }; 
 
+
+// Callback for click on a train
+clickOnTrain = function(event){
+    // show the modal
+    runModal();
+
+    // Dig out the train number 
+    var trainNo = event.target.getAttribute("data-train");
+    console.log("Train No "+ trainNo);
+    
+    // and call function to fetch data and poulate the train data in the modal
+    getTrainInfo(trainNo);
+    
+};
+
+
 var getTrainInfo = function(trainNo){
     url = `https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
 
-    fetch(url,init).then(function(res){
-        
+
+
+    // flush the modal
+
+    fetch(url,init).then(function(res){      
         return res.json()
     }).then(function(data){
+        
         console.log(data);
+        
+        // Build a html element 
+        var trainEL = document.createElement("div");
+
+        var trainSets = data.materieeldelen;
+        
+        var trainSetTitleEL = document.createElement("span");
+        var trainSetImgEL = document.createElement("div");
+        trainSetImgEL.setAttribute("class", "trainsetimage")
+
+        var trainSetTitleStr = "";
+        
+        // loop over trans in set
+        for(trainSet of trainSets){ 
+            trainSetTitleStr += trainSet.type + " ";
+            var trainImgDiv = document.createElement("div");
+            var trainImgEL = document.createElement("img");
+            trainImgEL.setAttribute("src", trainSet.afbeelding) 
+            trainImgEL.setAttribute("class", "trainimage") 
+            trainImgDiv.appendChild(trainImgEL);
+            trainImgDiv.setAttribute("class", "trainimagediv")
+            trainSetImgEL.appendChild(trainImgDiv);
+        }
+        
+        trainSetTitleEL.textContent = trainSetTitleStr;
+
+        trainEL.appendChild(trainSetTitleEL) ; 
+        trainEL.appendChild(trainSetImgEL);
+        console.log(trainEL);
+        
+        modalContentEl.append(trainEL); 
+        
+        
+       
+
     });
 };
-
-
-// get tracks on the map
-//fetch("https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/1406",init).then(function(res){
-//    console.log(res);
-//    return res.json()
-//}).then(function(data){
-//    console.log(data)
-//})
-
-
-
-
-clickOnTrain = function(event){
-    var trainNo = event.target.getAttribute("data-train");
-    console.log("Train No "+ trainNo);
-    getTrainInfo(trainNo);
-};
-
 
 
 
@@ -152,9 +188,37 @@ async function fetchData(url){
 
 
 $("body").on("click", "#trainlink",clickOnTrain);
-
-
-
 document.getElementById("map").addEventListener("click", clickOnStation);
+
+
+
+// When the user clicks on the button, open the modal
+runModal = function(){
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    //Clear contetnt
+    modalContentEl = document.querySelector(".modal-content p")
+    modalContentEl.innerHTML = "Fetching Data ...";
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+        
+    modal.style.display = "block";
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+    modal.style.display = "none";
+
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+};    
+    
 
 
