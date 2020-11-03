@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<<<<<<< HEAD
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/grids-responsive-min.css">
+    
+    
+    
+=======
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity=".sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/grids-responsive-min.css">
     
+>>>>>>> ec76cdd06ee1605efdf5165345c755e5b95380ff
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
    
     <link rel="stylesheet" href="./assets/css/style.css" />
@@ -31,6 +39,16 @@
     </header>
 
     <!-- Map here -->
+<<<<<<< HEAD
+
+    <div id='map' style='width: 400px; height: 300px;'></div>
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VzbW9yOTQiLCJhIjoiY2tndnB3NHN0MDJyYzMxcG5jeXdwb2FsdiJ9.CRLb5ok63M2sLPu3D6oseA';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [5.28, 52.21],
+=======
     <div id='map'></div>
     <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VzbW9yOTQiLCJhIjoiY2tndnB3NHN0MDJyYzMxcG5jeXdwb2FsdiJ9.CRLb5ok63M2sLPu3D6oseA';
@@ -38,6 +56,7 @@
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [5.28, 52.21],
+>>>>>>> ec76cdd06ee1605efdf5165345c755e5b95380ff
                 zoom: 7
             });
         </script>
@@ -47,7 +66,7 @@
     <script src = "assets/js/script.js"></script>
 
     <!-- footer-->
-    <footer>
+    <footer id="footer">
         <h4>Made for commuters, by commuters.</h4>
         <div>
             <h5>&copy; KBG, Inc.</h5>
