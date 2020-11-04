@@ -107,8 +107,8 @@ a.pure-button-primary {
 
 .home-menu .pure-menu-heading {
     color: white;
-    font-weight: 400;
-    font-size: 120%;
+    font-weight: 600;
+    font-size: 130%;
 }
 
 .home-menu .pure-menu-selected a {
@@ -117,6 +117,8 @@ a.pure-button-primary {
 
 .home-menu a {
     color: #6FBEF3;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: normal;
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
