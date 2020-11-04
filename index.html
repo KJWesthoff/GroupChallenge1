@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
    
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/modal.css" />
     <link rel="stylesheet" href="./assets/css/mapstyle.css">
     <link rel="stylesheet" href="./assets/css/purecss.css">
   
@@ -51,6 +52,8 @@
         </div>
     </header>
 
+    
+
     <!-- Map here -->
 
     <div id='map'></div>
@@ -61,10 +64,27 @@
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [5.28, 52.21],
 
-    </div>
+                zoom: 7
+            });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
         <div id="" style="width: height "></div>
 
     
+
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Fetching data..</p>
+        </div>
+    
+    </div>
+
     <script src = "assets/js/script.js"></script>
 
     <!-- footer-->
@@ -74,6 +94,7 @@
             <h5>&copy; KBG, Inc.</h5>
         </div>
     </footer>
+  
 </body>
 
 </html>
