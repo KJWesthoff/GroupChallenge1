@@ -11,6 +11,7 @@
     color: rgba(47, 66, 25, 1);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: 700;
+    height: 15vh;
 }
 
 .home-menu {
@@ -49,6 +50,7 @@ h3 {
 
 footer {
     background: rgba(86, 109, 84, 1);
+    height: 10vh;
     width: 100%;
     padding: 10px 10px;
     padding-bottom: 20px;
@@ -63,11 +65,13 @@ footer h4 {
     color: white;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: normal;
+    font-size: small;
 }
 
 footer h5 {
     color: white;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: small;
 }
 
 @media screen and (max-width: 768px) {
