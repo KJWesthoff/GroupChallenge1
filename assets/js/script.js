@@ -109,6 +109,10 @@ clickOnStation = function(event){
 clickOnTrain = function(event){
     // show the modal
     runModal();
+    // get the modal page
+    modalPageEl =document.querySelector(".modal-page");
+    console.log(modalPageEl);
+
 
     // Dig out the train number 
     var trainNo = event.target.getAttribute("data-train");
@@ -188,6 +192,7 @@ async function fetchData(url){
 
 
 $("body").on("click", "#trainlink",clickOnTrain);
+
 document.getElementById("map").addEventListener("click", clickOnStation);
 
 
