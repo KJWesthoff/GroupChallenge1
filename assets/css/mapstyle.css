@@ -1,17 +1,26 @@
+.stationmarker {  
+  cursor: pointer;
+  color: black;
+}
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
 
 
-
-
-  .stationmarker {
-     
-    cursor: pointer;
-  }
-
-  .mapboxgl-popup {
-    max-width: 200px;
-  }
-  
-  .mapboxgl-popup-content {
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-  }
+.map-container {
+  background: white;
+  z-index: 1;
+  overflow: hidden;
+  /* The following styles are required for the "scroll-over" effect */
+  width: 100%;
+  height: 88%;
+  top: 0;
+  left: 0;
+  position: fixed !important;
+}
