@@ -11,9 +11,6 @@
      
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
 
-    
-    
-
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
    
     <link rel="stylesheet" href="./assets/css/style.css" />
@@ -73,14 +70,79 @@
         
         <!-- Modal content -->
         <div class="modal-content">
-            <iframe src= "train-list.html" ></iframe>  
-        <span class="close">&times;</span>
-        <p></p>
-        </div>
+            
+            <span class="close">&times;</span>
+            <p></p>
+                <div class="train-container card">
+                    <div class="card-divider">
+                        <!-- dynamically add train name into h3 element -->
+                        <h3 class="train-name"></h3>
+                    </div>
+                    <div class="train-content card-section">
+                        <div class="train-times">
+                            <!-- dynamically add train arrival and departure time as a 'p' tag beneath 'h4' tags  -->
+                            <div class="arrival-time">
+                                <h4>Arrival Time:</h4>
+                                <!-- p tag goes here -->
+                            </div>
+                            <hr>
+                            <div class="departure-time">
+                                <h4>Departure Time:</h4>
+                                <!-- p tag goes here -->
+                            </div>    
+                            <hr>    
+                        </div>
+                        <br>
+                        <button class="button-alert features-btn">Show Train Features</button>
+                        <!-- dynamically add train features -->
+                        <div class="train-features hidden">
+                            <br>
+                            <div class="origin">
+                                <h5>Origin:</h5>
+                                <p></p>   
+                            </div>
+                            <div class="destination">
+                                <h5>Destination:</h5>
+                                <p></p>
+                            </div>
+                            <div class="facilities">
+                                <h5>Facilities:</h5>
+                                <ul class="facilities-list-group"></ul>
+                            </div>
+                            <div class="train-img">
+                                <!-- add train img element here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+        
+            </div>
+        
+        </div>  
     
-    </div>
-
+    
+    
+    
+    
+    
+    
     <script src = "assets/js/script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- footer-->
     <footer id="footer">
