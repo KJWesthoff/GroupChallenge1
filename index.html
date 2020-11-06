@@ -2,22 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
 
-    
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
-
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="./assets/css/mapstyle.css">
-
-    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/grids-responsive-min.css"><<<<<<< HEAD
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/grids-responsive-min.css">
-    
-    
-    
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/grids-responsive-min.css">
+     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
    
@@ -25,7 +17,7 @@
     <link rel="stylesheet" href="./assets/css/modal.css" />
     <link rel="stylesheet" href="./assets/css/mapstyle.css">
     <link rel="stylesheet" href="./assets/css/purecss.css">
-  
+    <link rel="stylesheet" href="./assets/css/train-list.css">
     <title>Trein</title>
 
 
@@ -55,7 +47,6 @@
     
 
     <!-- Map here -->
-
     <div id='map'></div>
     <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VzbW9yOTQiLCJhIjoiY2tndnB3NHN0MDJyYzMxcG5jeXdwb2FsdiJ9.CRLb5ok63M2sLPu3D6oseA';
@@ -63,7 +54,6 @@
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [5.28, 52.21],
-
                 zoom: 7
             });
         </script>
@@ -75,17 +65,84 @@
 
 
     <!-- The Modal -->
+    
     <div id="myModal" class="modal">
-
+        
         <!-- Modal content -->
         <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Fetching data..</p>
-        </div>
+            
+            <span class="close">&times;</span>
+            <p></p>
+                <div class="train-container card">
+                    <div class="card-divider">
+                        <!-- dynamically add train name into h3 element -->
+                        <h3 class="train-name"></h3>
+                    </div>
+                    <div class="train-content card-section">
+                        <div class="train-times">
+                            <!-- dynamically add train arrival and departure time as a 'p' tag beneath 'h4' tags  -->
+                            <div class="arrival-time">
+                                <h4>Arrival Time:</h4>
+                                <!-- p tag goes here -->
+                            </div>
+                            <hr>
+                            <div class="departure-time">
+                                <h4>Departure Time:</h4>
+                                <!-- p tag goes here -->
+                            </div>    
+                            <hr>    
+                        </div>
+                        <br>
+                        <button class="button-alert features-btn">Show Train Features</button>
+                        <!-- dynamically add train features -->
+                        <div class="train-features hidden">
+                            <br>
+                            <div class="origin">
+                                <h5>Origin:</h5>
+                                <p></p>   
+                            </div>
+                            <div class="destination">
+                                <h5>Destination:</h5>
+                                <p></p>
+                            </div>
+                            <div class="facilities">
+                                <h5>Facilities:</h5>
+                                <ul class="facilities-list-group"></ul>
+                            </div>
+                            <div class="train-img">
+                                <!-- add train img element here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+        
+            </div>
+        
+        </div>  
     
-    </div>
-
+    
+    
+    
+    
+    
+    
     <script src = "assets/js/script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- footer-->
     <footer id="footer">
