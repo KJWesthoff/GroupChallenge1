@@ -3,7 +3,7 @@ console.log("is it working..")
 var key = "e802f453e0d44b4a8cf3f06882eee4f9";
 var keyname = "Ocp-Apim-Subscription-Key";
 
-
+var stationsStore = JSON.parse(localStorage.getItem("favStationList")) || [];
 
 
 //var cors = require('cors');
@@ -67,6 +67,8 @@ clickOnStation = function(event){
     if(el.classList.contains("stationmarker")){
         var stationdata = JSON.parse(el.parentElement.getAttribute("data-obj"));
         
+        
+
         // Add whatever happens here..
         
        
@@ -100,9 +102,37 @@ clickOnStation = function(event){
         
         });
         
+        addTofavorites(UICCode,stationdata);
     };
 
 }; 
+
+// add the station to the favorites list
+var addTofavorites = function(stationId, Obj){
+    
+    favStationObj = {"stationId":stationId,
+                    "stationObj":Obj};    
+
+    // check if the station is allready there if it is then replace and prepend
+    for(i = 0; i<stationsStore.length; i++){
+        if(stationsStore[i].id === stationId){
+            stationsStore.splice(i,1);
+        };
+    };
+
+    stationsStore.push(favStationObj);
+
+    // trim the array at length 20 by getting the last 20 items for the array
+    if (stationsStore.length > 20){
+        stationsStore = stationsStore.slice(stationsStore.length-20,stationsStore.length);
+    } 
+
+    console.log(stationsStore.length);     
+    localStorage.setItem("favStationList",JSON.stringify(stationsStore));
+    
+
+}
+
 
 
 // Callback for click on a train
