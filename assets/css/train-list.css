@@ -62,7 +62,7 @@ body {
     margin: 10px 10px;
 }
 
-.arrival-time, .departure-time {
+.arrival-time, .departure-time, .train-details{
     display: flex;
     flex-wrap: wrap;
     margin: 0 15px;
