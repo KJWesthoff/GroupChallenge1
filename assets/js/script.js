@@ -109,6 +109,10 @@ clickOnStation = function(event){
 clickOnTrain = function(event){
     // show the modal
     runModal();
+    // get the modal page
+    modalPageEl =document.querySelector(".modal-page");
+    console.log(modalPageEl);
+
 
     // Dig out the train number 
     var trainNo = event.target.getAttribute("data-train");
@@ -123,11 +127,17 @@ clickOnTrain = function(event){
 var getTrainInfo = function(trainNo){
     url = `https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
 
-
-
-    // flush the modal
-
+    //Clear contetnt
+    modalContentEl = document.querySelector(".modal-content p")
+    modalContentEl.innerHTML = "Fetching Data ...";
+    document.querySelector(".features-btn").style.opacity = 1;
+    // Fetch train details
     fetch(url,init).then(function(res){      
+        if(!res.ok){
+            return
+        }
+        console.log("res OK")
+
         return res.json()
     }).then(function(data){
         
@@ -146,6 +156,7 @@ var getTrainInfo = function(trainNo){
         
         // loop over trans in set
         for(trainSet of trainSets){ 
+            // Build HTML Element
             trainSetTitleStr += trainSet.type + " ";
             var trainImgDiv = document.createElement("div");
             var trainImgEL = document.createElement("img");
@@ -162,11 +173,18 @@ var getTrainInfo = function(trainNo){
         trainEL.appendChild(trainSetImgEL);
         console.log(trainEL);
         
+        // flush and append
+        modalContentEl.innerHTML = "";
         modalContentEl.append(trainEL); 
-        
-        
-       
 
+    }).catch(function(error){
+        // tell user the train details cannot be found
+        modalContentEl = document.querySelector(".modal-content p")
+        modalContentEl.innerHTML = "Details Not Availble For This Train";
+        // set details button to disables
+
+        document.querySelector(".features-btn").style.opacity = 0.3;
+        
     });
 };
 
@@ -188,6 +206,7 @@ async function fetchData(url){
 
 
 $("body").on("click", "#trainlink",clickOnTrain);
+
 document.getElementById("map").addEventListener("click", clickOnStation);
 
 
@@ -198,9 +217,7 @@ runModal = function(){
     // Get the modal
     var modal = document.getElementById("myModal");
 
-    //Clear contetnt
-    modalContentEl = document.querySelector(".modal-content p")
-    modalContentEl.innerHTML = "Fetching Data ...";
+    
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
