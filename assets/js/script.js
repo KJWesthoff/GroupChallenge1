@@ -44,7 +44,7 @@ var putMarkersOnMap = function(dataObj){
             el.innerHTML = '<i class="stationmarker fas fa-train"></i>';
             //el.className = ;
             el.setAttribute("data-obj", JSON.stringify(st));
-
+            el.setAttribute("id", st.UICCode);    
             // make a mapbox marker
             new mapboxgl.Marker(el).setLngLat(coordinates).addTo(map);
             
@@ -66,11 +66,7 @@ clickOnStation = function(event){
     
     if(el.classList.contains("stationmarker")){
         var stationdata = JSON.parse(el.parentElement.getAttribute("data-obj"));
-        
-        
-
-        // Add whatever happens here..
-        
+          
        
         // Get the station data
         var UICCode = stationdata.UICCode
@@ -102,10 +98,13 @@ clickOnStation = function(event){
         
         });
         
+        // put the staion in local storage and re render the favorites list
         addTofavorites(UICCode,stationdata);
+        renderFavorites();
     };
 
 }; 
+
 
 // add the station to the favorites list
 var addTofavorites = function(stationId, Obj){
@@ -122,17 +121,40 @@ var addTofavorites = function(stationId, Obj){
 
     stationsStore.push(favStationObj);
 
-    // trim the array at length 20 by getting the last 20 items for the array
-    if (stationsStore.length > 20){
-        stationsStore = stationsStore.slice(stationsStore.length-20,stationsStore.length);
+    // trim the array at length 5 by getting the last 5 items for the array
+    if (stationsStore.length > 5){
+        stationsStore = stationsStore.slice(stationsStore.length-5,stationsStore.length);
     } 
 
-    console.log(stationsStore.length);     
+   
     localStorage.setItem("favStationList",JSON.stringify(stationsStore));
-    
-
 }
 
+
+var renderFavorites = function(){
+    
+    // get the favorite list dom element and clear it
+     
+    favListDomEl = document.querySelector(".pure-menu-children");
+    favListDomEl.innerHTML = "";
+
+    // get the favorites list from Local storage
+    stationsList = JSON.parse(localStorage.getItem("favStationList"));
+
+    // loop over station (note last vitited is the last item in list -hence the reverse)
+    for(station of stationsList.reverse()){
+        //get the needed data
+        var stationName = station.stationObj.namen.lang; 
+       
+
+        // make a list element with train data include all the station data in a data-object
+        var listEl = document.createElement("li");
+        listEl.innerHTML = ` <a data-object = '${JSON.stringify(station.stationObj)}' href="#" class="pure-menu-link favorite_station">${stationName}</a>`;
+        
+        //attach list element to dom
+        favListDomEl.appendChild(listEl);
+    };
+}
 
 
 // Callback for click on a train
@@ -234,8 +256,23 @@ async function fetchData(url){
 };
 
 
+clickOnFavStation = function(event){
+    
+    data = JSON.parse(event.target.getAttribute("data-object"));
+    
+    map.flyTo({
+        center:[data.lng, data.lat]
+    });
+
+   
+
+};
+
 
 $("body").on("click", "#trainlink",clickOnTrain);
+
+$("body").on("click", ".favorite_station", clickOnFavStation);
+
 
 document.getElementById("map").addEventListener("click", clickOnStation);
 
