@@ -44,7 +44,7 @@ var putMarkersOnMap = function(dataObj){
             el.innerHTML = '<i class="stationmarker fas fa-train"></i>';
             //el.className = ;
             el.setAttribute("data-obj", JSON.stringify(st));
-            el.setAttribute("id", st.UICCode);    
+            el.setAttribute("id", `icn_${st.UICCode}`);    
             // make a mapbox marker
             new mapboxgl.Marker(el).setLngLat(coordinates).addTo(map);
             
@@ -263,6 +263,8 @@ clickOnFavStation = function(event){
     map.flyTo({
         center:[data.lng, data.lat]
     });
+
+    document.querySelector(`#icn_${data.UICCode}`).click()
 
    
 
