@@ -76,12 +76,16 @@ clickOnStation = function (event) {
       // put the list of trains in the popup for the station
 
       listEl = document.createElement("ol");
-      //console.log(data.arrivals)
+      console.log(data.arrivals)
       for (train of data.arrivals) {
-        var trainlist = `${train.product.longCategoryName} ${train.name} From ${train.origin}`;
+        //console.log(train);
+        
+        arrivalTime = moment(train.actualDateTime, "YYYY-MM-DDTHH:mm:ssZ").utc(false).format("h:m:a");
+    
+        var trainlist = `${arrivalTime} ${train.name} From ${train.origin}`;
 
         itemEl = document.createElement("li");
-        itemEl.innerHTML = `<p id="trainlink" data-train = "${train.product.number}" >${trainlist}</p>`;
+        itemEl.innerHTML = `<p id="trainlink" data-train = '${JSON.stringify(train)}' >${trainlist}</p>`;
         listEl.append(itemEl);
       }
 
@@ -154,14 +158,19 @@ clickOnTrain = function (event) {
   console.log(modalPageEl);
 
   // Dig out the train number
-  var trainNo = event.target.getAttribute("data-train");
+  
+  var Arrival_data = JSON.parse(event.target.getAttribute("data-train"));
+  console.log(Arrival_data);
+  
+  var trainNo = Arrival_data.product.number
+
   console.log("Train No " + trainNo);
 
   // and call function to fetch data and poulate the train data in the modal
-  getTrainInfo(trainNo);
+  getTrainInfo(trainNo, Arrival_data);
 };
 
-var getTrainInfo = function (trainNo) {
+var getTrainInfo = function (trainNo, Arrival_data) {
   url = `https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
 
   //Clear contetnt
@@ -209,14 +218,38 @@ var getTrainInfo = function (trainNo) {
 
       trainEL.appendChild(trainSetTitleEL);
       trainEL.appendChild(trainSetImgEL);
-      console.log(trainEL);
+      //console.log(trainEL);
 
       // flush and append
       modalContentEl.innerHTML = "";
       modalContentEl.append(trainEL);
+
+      // add arrival time etc
+      var detailEl = document.querySelector(".train-details");
+      detailEl.innerHTML = `<h4> ${Arrival_data.product.longCategoryName} Train: ${Arrival_data.name}, Arriving From: ${Arrival_data.origin}</h4>`;  
+
+      var arrScheduleEl = document.querySelector(".arrival-time");
+      arrivalPlanned = moment(Arrival_data.plannedDateTime).utc(false);
+      arrivalActual = moment(Arrival_data.actualDateTime).utc(false);
+
+      if(arrivalPlanned.isSame(arrivalActual)){
+        arrivalStatus = "On Time"
+      } 
+      else if(arrivalPlanned.isAfter(arrivalActual)){
+          arrivalStatus = "Early: (" + arrivalActual.format("h:mm:a") + ")";
+         
+      }
+       else if(arrivalPlanned.isBefore(arrivalActual)){
+        arrivalStatus = "Dealayed: (" + arrivalActual.format("h:mm:a") + ")";
+      }
+    
+        arrScheduleEl.innerHTML = `<h4> Arriving: ${arrivalPlanned.format("h:mm:a")} (${arrivalStatus})</h4>`;  
+
+
     })
     .catch(function (error) {
       // tell user the train details cannot be found
+      console.log(error); 
       modalContentEl = document.querySelector(".modal-content p");
       modalContentEl.innerHTML = "Details Not Availble For This Train";
       // set details button to disables
