@@ -7,22 +7,27 @@
 }
 
 .header {
-    background-color: rgba(179, 195, 161, 1);
-    color: rgba(47, 66, 25, 1);
+    /* background-color: rgba(179, 195, 161, 1);
+    color: rgba(47, 66, 25, 1); */
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-weight: 700;
-    height: 15vh;
+    /* font-weight: 700;
+    height: 15vh; */
 }
 
-.home-menu {
+/* .home-menu {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(179, 195, 161, 1);
+    background: #2d3e50;
+    padding: 0 30px
+} */
+
+.pure-menu-children li {
+    list-style-type: none;
 }
 
-.brand-name {
+/* .brand-name {
     font-weight: bold;
     font-size: 3rem;
 }
@@ -32,9 +37,9 @@
     font-size: 1rem;
     padding-left: 20px;
     color: rgba(219, 224, 234, 1);
-}
+} */
 
-h1 {
+/* h1 {
     color: rgba(47, 66, 25, 1);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 700;
@@ -46,7 +51,7 @@ h3 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 300;
     margin: 30px 15px 0 30px;
-}
+} */
 
 footer {
     background: rgba(86, 109, 84, 1);
@@ -79,9 +84,9 @@ footer h5 {
         justify-content: center;
     }
 
-    .home-menu ul {
+    /* .home-menu ul {
         padding-bottom: 10px;
-    }
+    } */
 
     .brand-name {
         text-align: center;
