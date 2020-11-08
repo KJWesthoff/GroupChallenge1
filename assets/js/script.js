@@ -74,9 +74,15 @@ clickOnStation = function (event) {
 
     fetchData(url_arrivals).then(function (data) {
       // put the list of trains in the popup for the station
-
+      popUpEl = document.querySelector(".mapboxgl-popup-content");
       listEl = document.createElement("div");
       listEl.setAttribute("class", "popup_trainlist")
+      popUpEl.append(listEl);
+      
+      //clear the element
+      document.querySelector(".popup_trainlist").innerHTML= "";
+      
+
       console.log(data.arrivals)
       for (train of data.arrivals) {
         //console.log(train);
@@ -91,7 +97,7 @@ clickOnStation = function (event) {
         listEl.append(itemEl);
       }
 
-      popUpEl = document.querySelector(".mapboxgl-popup-content");
+     
       popUpEl.append(listEl);
     });
 
@@ -216,7 +222,7 @@ var getTrainInfo = function (trainNo, Arrival_data) {
         trainSetImgEL.appendChild(trainImgDiv);
       }
 
-      trainSetTitleEL.textContent = trainSetTitleStr;
+      trainSetTitleEL.textContent = "Train Type: " + trainSetTitleStr;
 
       trainEL.appendChild(trainSetTitleEL);
       trainEL.appendChild(trainSetImgEL);
