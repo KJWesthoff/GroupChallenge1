@@ -24,3 +24,9 @@
   left: 0;
   position: fixed !important;
 }
+
+
+
+#trainlink{
+  max-width: 100%;
+}

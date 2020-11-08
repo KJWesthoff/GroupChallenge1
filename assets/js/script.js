@@ -75,17 +75,19 @@ clickOnStation = function (event) {
     fetchData(url_arrivals).then(function (data) {
       // put the list of trains in the popup for the station
 
-      listEl = document.createElement("ol");
+      listEl = document.createElement("div");
+      listEl.setAttribute("class", "popup_trainlist")
       console.log(data.arrivals)
       for (train of data.arrivals) {
         //console.log(train);
         
         arrivalTime = moment(train.actualDateTime, "YYYY-MM-DDTHH:mm:ssZ").utc(false).format("h:m:a");
     
-        var trainlist = `${arrivalTime} ${train.name} From ${train.origin}`;
+        var trainlist = `${train.name} From ${train.origin}`;
 
-        itemEl = document.createElement("li");
-        itemEl.innerHTML = `<p id="trainlink" data-train = '${JSON.stringify(train)}' >${trainlist}</p>`;
+        itemEl = document.createElement("div");
+        itemEl.setAttribute("class", "popup_trainlist")
+        itemEl.innerHTML = `<div id="trainlink" class="pure-menu-link" data-train = '${JSON.stringify(train)}' >${trainlist}</div>`;
         listEl.append(itemEl);
       }
 
