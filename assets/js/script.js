@@ -50,7 +50,7 @@ var putMarkersOnMap = function (dataObj) {
       .setLngLat(coordinates)
       .setPopup(
         new mapboxgl.Popup({ offset: 25 }) // add popups
-          .setHTML(`<h4>'${st.namen.middel}</h4><p>${st.stationType}</p>`)
+          .setHTML(`<h4>'${st.namen.middel}</h4><p>${st.stationType}</p><div class="popup_trainlist"></div>`)
       )
       .addTo(map);
   }
@@ -75,14 +75,13 @@ clickOnStation = function (event) {
     fetchData(url_arrivals).then(function (data) {
       // put the list of trains in the popup for the station
       popUpEl = document.querySelector(".mapboxgl-popup-content");
-      listEl = document.createElement("div");
-      listEl.setAttribute("class", "popup_trainlist")
-      popUpEl.append(listEl);
+      listEl = document.querySelector(".popup_trainlist");
+      //clear the list element
+      listEl.innerHTML = "";
+      //listEl.setAttribute("class", "popup_trainlist")
       
-      //clear the element
-      document.querySelector(".popup_trainlist").innerHTML= "";
       
-
+     
       console.log(data.arrivals)
       for (train of data.arrivals) {
         //console.log(train);
@@ -109,11 +108,12 @@ clickOnStation = function (event) {
 
 // add the station to the favorites list
 var addTofavorites = function (stationId, Obj) {
-  favStationObj = { stationId: stationId, stationObj: Obj };
+  favStationObj = { "stationId": stationId, "stationObj": Obj };
 
   // check if the station is allready there if it is then replace and prepend
   for (i = 0; i < stationsStore.length; i++) {
-    if (stationsStore[i].id === stationId) {
+  
+    if (stationsStore[i].stationId === stationId) {
       stationsStore.splice(i, 1);
     }
   }
