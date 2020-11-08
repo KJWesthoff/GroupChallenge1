@@ -74,22 +74,30 @@ clickOnStation = function (event) {
 
     fetchData(url_arrivals).then(function (data) {
       // put the list of trains in the popup for the station
+      popUpEl = document.querySelector(".mapboxgl-popup-content");
+      listEl = document.createElement("div");
+      listEl.setAttribute("class", "popup_trainlist")
+      popUpEl.append(listEl);
+      
+      //clear the element
+      document.querySelector(".popup_trainlist").innerHTML= "";
+      
 
-      listEl = document.createElement("ol");
       console.log(data.arrivals)
       for (train of data.arrivals) {
         //console.log(train);
         
         arrivalTime = moment(train.actualDateTime, "YYYY-MM-DDTHH:mm:ssZ").utc(false).format("h:m:a");
     
-        var trainlist = `${arrivalTime} ${train.name} From ${train.origin}`;
+        var trainlist = `${train.name} From ${train.origin}`;
 
-        itemEl = document.createElement("li");
-        itemEl.innerHTML = `<p id="trainlink" data-train = '${JSON.stringify(train)}' >${trainlist}</p>`;
+        itemEl = document.createElement("div");
+        itemEl.setAttribute("class", "popup_trainlist")
+        itemEl.innerHTML = `<div id="trainlink" class="pure-menu-link" data-train = '${JSON.stringify(train)}' >${trainlist}</div>`;
         listEl.append(itemEl);
       }
 
-      popUpEl = document.querySelector(".mapboxgl-popup-content");
+     
       popUpEl.append(listEl);
     });
 
@@ -214,7 +222,7 @@ var getTrainInfo = function (trainNo, Arrival_data) {
         trainSetImgEL.appendChild(trainImgDiv);
       }
 
-      trainSetTitleEL.textContent = trainSetTitleStr;
+      trainSetTitleEL.textContent = "Train Type: " + trainSetTitleStr;
 
       trainEL.appendChild(trainSetTitleEL);
       trainEL.appendChild(trainSetImgEL);
@@ -240,7 +248,7 @@ var getTrainInfo = function (trainNo, Arrival_data) {
          
       }
        else if(arrivalPlanned.isBefore(arrivalActual)){
-        arrivalStatus = "Dealayed: (" + arrivalActual.format("h:mm:a") + ")";
+        arrivalStatus = "Delayed: (" + arrivalActual.format("h:mm:a") + ")";
       }
     
         arrScheduleEl.innerHTML = `<h4> Arriving: ${arrivalPlanned.format("h:mm:a")} (${arrivalStatus})</h4>`;  
@@ -281,11 +289,6 @@ clickOnFavStation = function (event) {
   document.querySelector(`#icn_${data.UICCode}`).click();
 };
 
-$("body").on("click", "#trainlink", clickOnTrain);
-
-$("body").on("click", ".favorite_station", clickOnFavStation);
-
-document.getElementById("map").addEventListener("click", clickOnStation);
 
 // When the user clicks on the button, open the modal
 runModal = function () {
@@ -308,3 +311,12 @@ runModal = function () {
     }
   };
 };
+
+
+// event listerners
+
+$("body").on("click", "#trainlink", clickOnTrain);
+
+$("body").on("click", ".favorite_station", clickOnFavStation);
+
+document.getElementById("map").addEventListener("click", clickOnStation);
