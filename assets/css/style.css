@@ -4,54 +4,64 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
 }
 
 .header {
-    /* background-color: rgba(179, 195, 161, 1);
-    color: rgba(47, 66, 25, 1); */
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    /* font-weight: 700;
-    height: 15vh; */
 }
 
-/* .home-menu {
+.home-menu {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    background: #2d3e50;
-    padding: 0 30px
-} */
-
-.pure-menu-children li {
-    list-style-type: none;
+    background-color: #2d3e50;
+    height: 7.5vh;
+    padding-bottom: 1.5rem;
+    box-shadow: 0 5px 10px rgba(0,0,0, 0.5);
 }
 
-/* .brand-name {
+.pure-menu-heading {
+    color: white;
+    font-weight: 600;
+}
+
+.brand-name {
     font-weight: bold;
-    font-size: 3rem;
+    font-size: 1.3rem;
+    padding-bottom: 1.5rem;
 }
 
 .brand-name span {
     font-weight: normal;
     font-size: 1rem;
     padding-left: 20px;
-    color: rgba(219, 224, 234, 1);
-} */
-
-/* h1 {
-    color: rgba(47, 66, 25, 1);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: 700;
-    padding-left: 15px;
 }
 
-h3 {
-    color: white;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: 300;
-    margin: 30px 15px 0 30px;
-} */
+.home-menu ul {
+    font-size: 1rem;
+    padding-right: 5rem;
+    padding-bottom: 1.3rem;
+}
+
+.home-menu a {
+    color: #6FBEF3;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: normal;
+}
+
+.home-menu li a:hover,
+.home-menu li a:focus {
+    background: none;
+    border: none;
+    color: #AECFE5;
+}
+
+.pure-menu-children li {
+    list-style-type: none;
+}
 
 footer {
     background: rgba(86, 109, 84, 1);
@@ -80,18 +90,18 @@ footer h5 {
 }
 
 @media screen and (max-width: 768px) {
-    .home-menu {
+    /* .home-menu {
         justify-content: center;
-    }
+    } */
 
     /* .home-menu ul {
         padding-bottom: 10px;
     } */
 
-    .brand-name {
+    /* .brand-name {
         text-align: center;
         width: 100%;
-    }
+    } */
 }
 
 @media screen and (max-width: 575px) {
