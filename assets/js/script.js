@@ -240,7 +240,7 @@ var getTrainInfo = function (trainNo, Arrival_data) {
          
       }
        else if(arrivalPlanned.isBefore(arrivalActual)){
-        arrivalStatus = "Dealayed: (" + arrivalActual.format("h:mm:a") + ")";
+        arrivalStatus = "Delayed: (" + arrivalActual.format("h:mm:a") + ")";
       }
     
         arrScheduleEl.innerHTML = `<h4> Arriving: ${arrivalPlanned.format("h:mm:a")} (${arrivalStatus})</h4>`;  
@@ -281,11 +281,6 @@ clickOnFavStation = function (event) {
   document.querySelector(`#icn_${data.UICCode}`).click();
 };
 
-$("body").on("click", "#trainlink", clickOnTrain);
-
-$("body").on("click", ".favorite_station", clickOnFavStation);
-
-document.getElementById("map").addEventListener("click", clickOnStation);
 
 // When the user clicks on the button, open the modal
 runModal = function () {
@@ -308,3 +303,12 @@ runModal = function () {
     }
   };
 };
+
+
+// event listerners
+
+$("body").on("click", "#trainlink", clickOnTrain);
+
+$("body").on("click", ".favorite_station", clickOnFavStation);
+
+document.getElementById("map").addEventListener("click", clickOnStation);
