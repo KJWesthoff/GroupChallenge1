@@ -82,7 +82,7 @@ clickOnStation = function (event) {
       
       
      
-      console.log(data.arrivals)
+      //console.log(data.arrivals)
       for (train of data.arrivals) {
         //console.log(train);
         
@@ -163,16 +163,16 @@ clickOnTrain = function (event) {
   runModal();
   // get the modal page
   modalPageEl = document.querySelector(".modal-page");
-  console.log(modalPageEl);
+  //console.log(modalPageEl);
 
   // Dig out the train number
   
   var Arrival_data = JSON.parse(event.target.getAttribute("data-train"));
-  console.log(Arrival_data);
+  //console.log(Arrival_data);
   
   var trainNo = Arrival_data.product.number
 
-  console.log("Train No " + trainNo);
+  //console.log("Train No " + trainNo);
 
   // and call function to fetch data and poulate the train data in the modal
   getTrainInfo(trainNo, Arrival_data);
@@ -191,12 +191,12 @@ var getTrainInfo = function (trainNo, Arrival_data) {
       if (!res.ok) {
         return;
       }
-      console.log("res OK");
+      //console.log("res OK");
 
       return res.json();
     })
     .then(function (data) {
-      console.log(data);
+      //console.log(data);
 
       // Build a html element
       var trainEL = document.createElement("div");
