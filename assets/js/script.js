@@ -1,17 +1,19 @@
-console.log("is it working..");
+// -------------------------
+// Init and global variables 
+// -------------------------
 
+//Api subscriptionkeys - dutch rail
 var key = "e802f453e0d44b4a8cf3f06882eee4f9";
 var keyname = "Ocp-Apim-Subscription-Key";
 
+// Init list from local storage
 var stationsStore = JSON.parse(localStorage.getItem("favStationList")) || [];
 
 if(stationsStore.length > 1){
     renderFavorites();
 };
 
-//var cors = require('cors');
-//app.use(cors());
-
+// Init section neede to put headers in fetch calls
 init = {
   method: "GET",
   headers: { "Ocp-Apim-Subscription-Key": key },
@@ -25,9 +27,30 @@ fetchData(url_stations).then(function (data) {
   putMarkersOnMap(data);
 });
 
-// dots fiw checking in console
-var stationDots;
 
+// Async Wrap of fetch funcition 
+// Note to self doesent really ermove complexity as it also returns a promise..
+
+async function fetchData(url) {
+  let res = await fetch(url, init);
+  if (!res.ok) {
+    console.log("its not working");
+  } else {
+    console.log("response code" + res.status);
+    var data = await res.json();
+
+    return data.payload;
+  }
+}
+
+
+// -------------------------
+// Function declarations 
+// -------------------------
+
+
+
+// Function to put markers on the main map
 var putMarkersOnMap = function (dataObj) {
   // function putting markers in the map
   // Inputs:  dataObg: NS-rail API list of station objcts
@@ -56,57 +79,8 @@ var putMarkersOnMap = function (dataObj) {
   }
 };
 
-//Callbacks
-clickOnStation = function (event) {
-  var el = event.target;
 
-  if (el.classList.contains("stationmarker")) {
-    var stationdata = JSON.parse(el.parentElement.getAttribute("data-obj"));
-
-    // Get the station data
-    var UICCode = stationdata.UICCode;
-
-    //Get list of arriving trains
-
-    //build url
-    url_arrivals = `https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/arrivals?uicCode=${UICCode}`;
-    // fetch the arrving train data
-
-    fetchData(url_arrivals).then(function (data) {
-      // put the list of trains in the popup for the station
-      popUpEl = document.querySelector(".mapboxgl-popup-content");
-      listEl = document.querySelector(".popup_trainlist");
-      //clear the list element
-      listEl.innerHTML = "";
-      //listEl.setAttribute("class", "popup_trainlist")
-      
-      
-     
-      //console.log(data.arrivals)
-      for (train of data.arrivals) {
-        //console.log(train);
-        
-        arrivalTime = moment(train.actualDateTime, "YYYY-MM-DDTHH:mm:ssZ").utc(false).format("h:m:a");
-    
-        var trainlist = `${train.name} From ${train.origin}`;
-
-        itemEl = document.createElement("div");
-        itemEl.setAttribute("class", "popup_trainlist")
-        itemEl.innerHTML = `<div id="trainlink" class="pure-menu-link" data-train = '${JSON.stringify(train)}' >${trainlist}</div>`;
-        listEl.append(itemEl);
-      }
-
-     
-      popUpEl.append(listEl);
-    });
-
-    // put the staion in local storage and re render the favorites list
-    addTofavorites(UICCode, stationdata);
-    renderFavorites();
-  }
-};
-
-// add the station to the favorites list
+// Add the station to the favorites list
 var addTofavorites = function (stationId, Obj) {
   favStationObj = { "stationId": stationId, "stationObj": Obj };
 
@@ -132,8 +106,9 @@ var addTofavorites = function (stationId, Obj) {
 };
 
 
+ // get the favorite list dom element and clear it
 function renderFavorites() {
-  // get the favorite list dom element and clear it
+ 
 
   favListDomEl = document.querySelector(".pure-menu-children");
   favListDomEl.innerHTML = "";
@@ -155,27 +130,6 @@ function renderFavorites() {
     //attach list element to dom
     favListDomEl.appendChild(listEl);
   }
-};
-
-// Callback for click on a train
-clickOnTrain = function (event) {
-  // show the modal
-  runModal();
-  // get the modal page
-  modalPageEl = document.querySelector(".modal-page");
-  //console.log(modalPageEl);
-
-  // Dig out the train number
-  
-  var Arrival_data = JSON.parse(event.target.getAttribute("data-train"));
-  //console.log(Arrival_data);
-  
-  var trainNo = Arrival_data.product.number
-
-  //console.log("Train No " + trainNo);
-
-  // and call function to fetch data and poulate the train data in the modal
-  getTrainInfo(trainNo, Arrival_data);
 };
 
 var getTrainInfo = function (trainNo, Arrival_data) {
@@ -266,31 +220,7 @@ var getTrainInfo = function (trainNo, Arrival_data) {
     });
 };
 
-// Main fetch funcition - made async
-async function fetchData(url) {
-  let res = await fetch(url, init);
-  if (!res.ok) {
-    console.log("its not working");
-  } else {
-    console.log("response code" + res.status);
-    var data = await res.json();
-
-    return data.payload;
-  }
-}
-
-clickOnFavStation = function (event) {
-  data = JSON.parse(event.target.getAttribute("data-object"));
-
-  map.flyTo({
-    center: [data.lng, data.lat],
-  });
-
-  document.querySelector(`#icn_${data.UICCode}`).click();
-};
-
-
-// When the user clicks on the button, open the modal
+// Open the modal
 runModal = function () {
   // Get the modal
   var modal = document.getElementById("myModal");
@@ -312,9 +242,104 @@ runModal = function () {
   };
 };
 
+// ---------------------------------------
+//  Callback functions
+// ---------------------------------------
 
+// When click on a station
+clickOnStation = function (event) {
+  var el = event.target;
+
+  if (el.classList.contains("stationmarker")) {
+    var stationdata = JSON.parse(el.parentElement.getAttribute("data-obj"));
+
+    // Get the station data
+    var UICCode = stationdata.UICCode;
+
+    //Get list of arriving trains
+
+    //build url
+    url_arrivals = `https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/arrivals?uicCode=${UICCode}`;
+    // fetch the arrving train data
+
+    fetchData(url_arrivals).then(function (data) {
+      // put the list of trains in the popup for the station
+      popUpEl = document.querySelector(".mapboxgl-popup-content");
+      listEl = document.querySelector(".popup_trainlist");
+      //clear the list element
+      listEl.innerHTML = "";
+      //listEl.setAttribute("class", "popup_trainlist")
+      
+      
+     
+      //console.log(data.arrivals)
+      for (train of data.arrivals) {
+        //console.log(train);
+        
+        arrivalTime = moment(train.actualDateTime, "YYYY-MM-DDTHH:mm:ssZ").utc(false).format("h:m:a");
+    
+        var trainlist = `${train.name} From ${train.origin}`;
+
+        itemEl = document.createElement("div");
+        itemEl.setAttribute("class", "popup_trainlist")
+        itemEl.innerHTML = `<div id="trainlink" class="pure-menu-link" data-train = '${JSON.stringify(train)}' >${trainlist}</div>`;
+        listEl.append(itemEl);
+      }
+
+     
+      popUpEl.append(listEl);
+    });
+
+    // put the staion in local storage and re render the favorites list
+    addTofavorites(UICCode, stationdata);
+    renderFavorites();
+  }
+};
+
+
+
+// Callback for click on a train in the station list
+clickOnTrain = function (event) {
+  // show the modal
+  runModal();
+  // get the modal page
+  modalPageEl = document.querySelector(".modal-page");
+  //console.log(modalPageEl);
+
+  // Dig out the train number
+  
+  var Arrival_data = JSON.parse(event.target.getAttribute("data-train"));
+  //console.log(Arrival_data);
+  
+  var trainNo = Arrival_data.product.number
+
+  //console.log("Train No " + trainNo);
+
+  // and call function to fetch data and poulate the train data in the modal
+  getTrainInfo(trainNo, Arrival_data);
+};
+
+
+// Click on a station in the Last Visited list
+clickOnFavStation = function (event) {
+  data = JSON.parse(event.target.getAttribute("data-object"));
+
+  map.flyTo({
+    center: [data.lng, data.lat],
+  });
+
+  document.querySelector(`#icn_${data.UICCode}`).click();
+};
+
+
+
+
+
+// ---------------------------------------
 // event listerners
+// ---------------------------------------
 
+// jQuery used when the elements do not exist all the time
 $("body").on("click", "#trainlink", clickOnTrain);
 
 $("body").on("click", ".favorite_station", clickOnFavStation);
