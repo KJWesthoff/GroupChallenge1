@@ -109,11 +109,12 @@ clickOnStation = function (event) {
 
 // add the station to the favorites list
 var addTofavorites = function (stationId, Obj) {
-  favStationObj = { stationId: stationId, stationObj: Obj };
+  favStationObj = { "stationId": stationId, "stationObj": Obj };
 
   // check if the station is allready there if it is then replace and prepend
   for (i = 0; i < stationsStore.length; i++) {
-    if (stationsStore[i].id === stationId) {
+  
+    if (stationsStore[i].stationId === stationId) {
       stationsStore.splice(i, 1);
     }
   }
