@@ -17,12 +17,13 @@ Below is our user story that helped guide the development process.
 ### **AS A** commuter in the Netherlands,
 ### **I WANT** to see nearby trains, their arrival times, and the train features.
 ### -------------------------------------------
-
 ### **GIVEN** A moblile-friendly application,
 ### **WHEN** I click on a station on the map (in the Netherlands),
-### **THEN** I get a list of trains nearby, and that station is added to my Last Visited list.  
+### **THEN** I get a list of trains arriving, and that station is added to my Last Visited list.  
 ### **WHEN** I choose a train,
 ### **THEN** I get a picture of the train, the train's arrival time, and the train car features. 
+### **WHEN** I frequently select a specific station,
+### **THEN** it will be saved to my favorites list.
 ### -------------------------------------------
 ## The application uses the Dutch National Rail company [(NS API)](https://www.ns.nl/en/travel-information/ns-api) API to find train information, and the [Mapbox API](https://www.mapbox.com/) for location specifications.
 
@@ -85,12 +86,3 @@ In future development, we hope to expand what the user will be able to do.
 
 * Karl-Johan Westhoff:
      https://github.com/KJWesthoff
-
-
-
- 
-
-
-
-
-
