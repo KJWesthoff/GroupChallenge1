@@ -20,9 +20,6 @@
 
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/modal.css" />
-
-    <link rel="stylesheet" href="./assets/css/purecss.css">
-    <link rel="stylesheet" href="./assets/css/train-list.css">
     <link rel="stylesheet" href="./assets/css/mapstyle.css">
     <title>Trein</title>
 
@@ -55,77 +52,63 @@
     <!-- Map here -->
     <div id='map'></div>
     <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VzbW9yOTQiLCJhIjoiY2tndnB3NHN0MDJyYzMxcG5jeXdwb2FsdiJ9.CRLb5ok63M2sLPu3D6oseA';
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [5.28, 52.21],
-                zoom: 7
-            });
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-
-        <div id="" style="width: height "></div>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VzbW9yOTQiLCJhIjoiY2tndnB3NHN0MDJyYzMxcG5jeXdwb2FsdiJ9.CRLb5ok63M2sLPu3D6oseA';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [5.28, 52.21],
+                    zoom: 7
+                });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 
     
-
-
+    
     <!-- The Modal -->
-    
     <div id="myModal" class="modal">
-        
         <!-- Modal content -->
         <div class="modal-content">
-            
             <span class="close">&times;</span>
             <p></p>
-                <div class="train-container card">
-                    <div class="card-divider">
-                        <!-- dynamically add train name into h3 element -->
-                        <h3 class="train-name"></h3>
-                    </div>
-                    <div class="train-content card-section">
-                        <div class="train-times">
-                            <!-- dynamically add train details and arrival time time as a 'p' tag beneath 'h4' tags  -->
-                            <div class="train-details">
-                                <h4>Train Details:</h4>
-                                <!-- p tag goes here -->
-                            </div>
-                            <hr>
-                            <div class="arrival-time">
-                                <h4>Arrival Time:</h4>
-                                <!-- p tag goes here -->
-                            </div>    
-                            <hr>    
+            <div class="train-container card">
+                <div class="card-divider"></div>
+                <div class="train-content card-section">
+                    <div class="train-times">
+                        <!-- dynamically add train details and arrival time time as a 'p' tag beneath 'h4' tags  -->
+                        <div class="train-details">
+                            <h4>Train Details:</h4>
+                            <!-- p tag goes here -->
                         </div>
+                        <hr>
+                        <div class="arrival-time">
+                            <h4>Arrival Time:</h4>
+                            <!-- p tag goes here -->
+                        </div>    
+                        <hr>    
+                    </div>
+                    <br>
+                    <!-- features button is for future development -->
+                    <button class="button-alert features-btn hidden">Show Train Features</button>
+                    <!-- dynamically add train features -->
+                    <div class="train-features hidden">
                         <br>
-                        <button class="button-alert features-btn hidden">Show Train Features</button>
-                        <!-- dynamically add train features -->
-                        <div class="train-features hidden">
-                            <br>
-                            <div class="origin">
-                                <h5>Origin:</h5>
-                                <p></p>   
-                            </div>
-                            <div class="destination">
-                                <h5>Destination:</h5>
-                                <p></p>
-                            </div>
-                            <div class="facilities">
-                                <h5>Facilities:</h5>
-                                <ul class="facilities-list-group"></ul>
-                            </div>
+                        <div class="origin">
+                            <h5>Origin:</h5>
+                            <p></p>   
+                        </div>
+                        <div class="destination">
+                            <h5>Destination:</h5>
+                            <p></p>
+                        </div>
+                        <div class="facilities">
+                            <h5>Facilities:</h5>
+                            <ul class="facilities-list-group"></ul>
                         </div>
                     </div>
                 </div>
-        
-        
             </div>
-        
-        </div>  
-    
-    
-    
+        </div>
+    </div>  
     
     
     
@@ -133,19 +116,8 @@
     <script src = "assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
     <!-- footer-->
     <footer id="footer">
         <h4>Made for commuters, by commuters.</h4>
@@ -155,7 +127,6 @@
     </footer>
   
 </body>
-
 </html>
 
 

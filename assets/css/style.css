@@ -19,7 +19,6 @@
     align-items: center;
     background-color: #2d3e50;
     height: 7.5vh;
-    padding-bottom: 1.5rem;
     box-shadow: 0 5px 10px rgba(0,0,0, 0.5);
 }
 
@@ -90,18 +89,21 @@ footer h5 {
 }
 
 @media screen and (max-width: 768px) {
-    /* .home-menu {
+    .home-menu {
         justify-content: center;
-    } */
+        height: 13vh;
+    }
 
-    /* .home-menu ul {
-        padding-bottom: 10px;
-    } */
-
-    /* .brand-name {
+    .brand-name {
         text-align: center;
         width: 100%;
-    } */
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .home-menu ul {
+        padding: 0
+    }
 }
 
 @media screen and (max-width: 575px) {
