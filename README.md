@@ -48,6 +48,9 @@ As stated before in the Problem Statement, the application's functionality is qu
 * As mentioned, when a certain train station is clicked, a list of trains arriving to that station will appear.
 * When the user clicks on a train from that list, a modal will appear, displaying an image of the specific train, and certain train details, as well as the arrival time.
 
+*Disclaimer*
+* Being that the Netherlands has a time difference, users in the US may not be prompted with trains depending on the time of day they are using the application. If that is the case, the Amsterdam area usually has trains running at most times of the day.
+
 # Future Development
 
 In future development, we hope to expand what the user will be able to do. 
