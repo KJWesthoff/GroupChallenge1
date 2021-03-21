@@ -3,7 +3,7 @@
 // -------------------------
 
 //Api subscriptionkeys - dutch rail
-var key = "e802f453e0d44b4a8cf3f06882eee4f9";
+var key = "feeb286d548c4269b80a29380760a930";
 var keyname = "Ocp-Apim-Subscription-Key";
 
 // Init list from local storage
@@ -133,6 +133,8 @@ function renderFavorites() {
 };
 
 var getTrainInfo = function (trainNo, Arrival_data) {
+
+  console.log(trainNo)
   url = `https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
 
   //Clear contetnt
