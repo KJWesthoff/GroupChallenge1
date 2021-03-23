@@ -2,12 +2,18 @@
 // Init and global variables 
 // -------------------------
 
+//import {keyScramble} from "./dutchRail"
+
 //Api subscriptionkeys - dutch rail
 var key = "8a46a746ffeb4c2aa0a3111af249e9e3";
 var keyname = "Ocp-Apim-Subscription-Key";
 
 // Init list from local storage
 var stationsStore = JSON.parse(localStorage.getItem("favStationList")) || [];
+
+
+//console.log("Scambled Key" + keyScramble)
+
 
 if(stationsStore.length > 1){
     renderFavorites();
