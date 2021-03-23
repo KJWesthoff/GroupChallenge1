@@ -3,7 +3,7 @@
 // -------------------------
 
 //Api subscriptionkeys - dutch rail
-var key = "feeb286d548c4269b80a29380760a930";
+var key = "85328315f5144362a992e4bc7e776f83";
 var keyname = "Ocp-Apim-Subscription-Key";
 
 // Init list from local storage
