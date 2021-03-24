@@ -2,27 +2,35 @@
 // Init and global variables 
 // -------------------------
 
-//import {keyScramble} from "./dutchRail"
+
+
+
 
 //Api subscriptionkeys - dutch rail
-var key = "8a46a746ffeb4c2aa0a3111af249e9e3";
+let keyScramble = "31124K8a46a746ffeb4c2aa0a3111af249e9e322094K";
+
+key = keyScramble.slice(6,-6)
+
+//var key = "8a46a746ffeb4c2aa0a3111af249e9e3";
 var keyname = "Ocp-Apim-Subscription-Key";
+
+
+
 
 // Init list from local storage
 var stationsStore = JSON.parse(localStorage.getItem("favStationList")) || [];
 
 
-//console.log("Scambled Key" + keyScramble)
 
 
 if(stationsStore.length > 1){
     renderFavorites();
 };
 
-// Init section neede to put headers in fetch calls
+// Init section needed to put headers in fetch calls
 init = {
   method: "GET",
-  headers: { "Ocp-Apim-Subscription-Key": key },
+  headers: {"Ocp-Apim-Subscription-Key": key },
 };
 
 // get stations on the map
@@ -141,7 +149,9 @@ function renderFavorites() {
 var getTrainInfo = function (trainNo, Arrival_data) {
 
   console.log(trainNo)
-  url = `https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
+  //url = `https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
+  url = `https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
+
 
   //Clear contetnt
   modalContentEl = document.querySelector(".modal-content p");
@@ -323,7 +333,7 @@ clickOnTrain = function (event) {
 
   //console.log("Train No " + trainNo);
 
-  // and call function to fetch data and poulate the train data in the modal
+  // and call function to fetch data and populate the train data in the modal
   getTrainInfo(trainNo, Arrival_data);
 };
 
