@@ -149,8 +149,8 @@ function renderFavorites() {
 var getTrainInfo = function (trainNo, Arrival_data) {
 
   console.log(trainNo)
-  //url = `https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
-  url = `https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
+  url = `https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
+  
 
 
   //Clear contetnt
