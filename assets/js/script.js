@@ -30,7 +30,8 @@ if(stationsStore.length > 1){
 // Init section needed to put headers in fetch calls
 init = {
   method: "GET",
-  headers: {"Ocp-Apim-Subscription-Key": key },
+  headers: {"Ocp-Apim-Subscription-Key": key},         
+         
 };
 
 // get stations on the map
@@ -43,7 +44,7 @@ fetchData(url_stations).then(function (data) {
 
 
 // Async Wrap of fetch funcition 
-// Note to self doesent really ermove complexity as it also returns a promise..
+// Note to self doesn't really remove complexity as it also returns a promise..
 
 async function fetchData(url) {
   let res = await fetch(url, init);
@@ -62,7 +63,17 @@ async function fetchData(url) {
 // Function declarations 
 // -------------------------
 
+// Function to do the ns rail https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo} call from the backend
 
+const getTrain = async (trainNo) => {
+
+  res = await fetch(`/api/train/${trainNo}`)
+  data = await res.json()
+
+  
+  return Promise.resolve(data)
+
+}
 
 // Function to put markers on the main map
 var putMarkersOnMap = function (dataObj) {
@@ -149,27 +160,25 @@ function renderFavorites() {
 var getTrainInfo = function (trainNo, Arrival_data) {
 
   console.log(trainNo)
-  url = `https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
+  //url = `https://cors-anywhere.herokuapp.com/https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
+  url = `https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/${trainNo}`;
   
 
 
-  //Clear contetnt
+  // Using the get train wrapper above to fetch data via the backend
+  getTrain(trainNo).then(data => console.log(data))
+
+
+  //Clear content
   modalContentEl = document.querySelector(".modal-content p");
   modalContentEl.innerHTML = "Fetching Data ...";
   document.querySelector(".features-btn").style.opacity = 1;
   // Fetch train details
-  fetch(url, init)
-    .then(function (res) {
-      if (!res.ok) {
-        return;
-      }
-      //console.log("res OK");
-
-      return res.json();
-    })
+  
+   // Using the get train wrapper above to fetch NS rail data via the backend
+   getTrain(trainNo)
     .then(function (data) {
-      //console.log(data);
-
+      
       // Build a html element
       var trainEL = document.createElement("div");
 
