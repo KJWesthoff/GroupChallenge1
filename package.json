@@ -1,0 +1,23 @@
+{
+  "name": "groupchallenge1",
+  "version": "1.0.0",
+  "description": "![Trein desktop screenshot](./assets/images/trein-desktop-screenshot.png)   ![Trein mobile screenshot](./assets/images/trein-mobile-screenshot.png)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KJWesthoff/GroupChallenge1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KJWesthoff/GroupChallenge1/issues"
+  },
+  "homepage": "https://github.com/KJWesthoff/GroupChallenge1#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
